@@ -11,10 +11,11 @@ class ApiController extends Controller
     public function store( Request $request ) {
 
         $data = [
-            'name' => 'Ship Your Idea nnn',
+            'name' => 'sinisa',
             'type' => 'variable',
             'description' => 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.',
-            'short_description' => 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+            'short_description' => 'Pellentesque habitant morbi tristique senect
+            us et netus et malesuada fames ac turpis egestas.',
             'categories' => [
                 [
                     'id' => 9
