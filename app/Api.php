@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Automattic\WooCommerce\Client;
 use Automattic\WooCommerce\HttpClient\HttpClientException;
+use Automattic\WooCommerce\Client;
 
 class Api {
 
@@ -33,7 +33,7 @@ class Api {
             if( in_array( $method, $methods ) ) {
                 if( isset ( $data ) ) {
                     try {
-                        $res = $woocomerce->{$method}( $endpoint, self::generate_data( $data ) );
+                        $res = $woocomerce->{$method}( $endpoint, $data );
                    }catch( HttpClientException $e ) {
                        return response()->json(
                            [
@@ -56,56 +56,48 @@ class Api {
             return $res;
     }
 
-    public static function generate_data( $data ) {
-   // return $data->image_1;
-    $array = [
-                'name'              => $data->name,
-                'type'              => $data->type,
-                'regural_price'     => $data->regular_price,
-                'description'       => $data->description,
-                'short_description' => $data->short_description,
-            ];
+    public static function generate_product_data( $data ) {
 
+        return [
+            'name'              => $data->name,
+            'type'              => $data->type,
+            'regural_price'     => $data->regular_price,
+            'description'       => $data->description,
+            'short_description' => $data->short_description,
+            'categories' => [
+                [
+                    'id'   => $data->category_1
+                ]
+            ],
+            'meta_data' => [
+                [
+                    'key'   => $data->m_key,
+                    'value' => $data->m_value
+                ]
+            ]
+        ];
+    }
 
-        if( isset( $data->image_1 ) && isset( $data->image_2 ) ) {
-            array_push( $array, [['src' => $data->image_1 ]] );
+    public static function generate_customer_data( $data ) {
 
-            $array['images'] = $array['0'];
-            unset( $array[0] );
-
-            array_push( $array['images'], ['src'=> $data->image_2] );
-
-        }elseif( isset( $data->image_1 ) ) {
-            array_push( $array, [['src' => $data->image_1]] );
-
-            $array['images'] = $array['0'];
-            unset( $array[0] );
-        }
-
-        if( isset( $data->category_1) && isset( $data->category_2 ) ) {
-            array_push( $array, [['id' => $data->category_1]]) ;
-
-            if( ! isset( $data->image_1) && ! isset( $data->image_2 ) ) {
-                $array['category'] = $array['0'];
-                unset( $array[0] );
-            }else{
-                $array['category'] = $array['1'];
-                unset( $array[1] );
-            }
-
-            array_push( $array['category'], ['id' => $data->category_2] );
-        }elseif( isset( $data->category_1 ) ) {
-            array_push( $array, [['id' => $data->category_id]] );
-
-            if( ! isset( $data->image_1) && ! isset( $data->image_2 ) ) {
-                $array['category'] = $array['0'];
-                unset( $array[0] );
-            }else{
-                $array['category'] = $array['1'];
-                unset( $array[1] );
-            }
-
-        }
-        return $array;
+        return [
+            'email'      => $data->email,
+            'first_name' => $data->first_name,
+            'last_name'  => $data->last_name,
+            'username'   => $data->username,
+            'billing'    => [
+                'first_name' => $data->b_first_name,
+                'last_name'  => $data->b_last_name,
+                'company'    => $data->b_company,
+                'address_1'  => $data->b_address_1,
+                'address_2'  => $data->b_address_2,
+                'city'       => $data->b_city,
+                'state'      => $data->b_state,
+                'postcode'   => $data->b_postcode,
+                'country'    => $data->b_country,
+                'email'      => $data->b_email,
+                'phone'      => $data->b_phone
+            ]
+        ];
     }
 }
