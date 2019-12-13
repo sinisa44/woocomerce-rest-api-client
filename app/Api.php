@@ -2,6 +2,7 @@
 
 namespace App;
 
+
 use Automattic\WooCommerce\HttpClient\HttpClientException;
 use Automattic\WooCommerce\Client;
 
@@ -67,6 +68,13 @@ class Api {
             'categories' => [
                 [
                     'id'   => $data->category_1
+                ]
+            ],
+            'images' => [
+                [
+                    'position' => 0,
+                    'alt' => 'images',
+                    'src'  => $data->image_1
                 ]
             ],
             'meta_data' => [
