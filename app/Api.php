@@ -65,6 +65,9 @@ class Api {
             'regural_price'     => $data->regular_price,
             'description'       => $data->description,
             'short_description' => $data->short_description,
+            'price'             => $data->price,
+            'regular_price'     => $data->price,
+            'sku'               => $data->sku, //barcode
             'categories' => [
                 [
                     'id'   => $data->category_1
@@ -72,15 +75,15 @@ class Api {
             ],
             'images' => [
                 [
-                    'position' => 0,
-                    'alt' => 'images',
+                    'position' => 1,
+                    'alt' => 'image',
                     'src'  => $data->image_1
                 ]
             ],
             'meta_data' => [
                 [
-                    'key'   => $data->m_key,
-                    'value' => $data->m_value
+                    'key'   => 'ticket_sales_end', //custom field
+                    'value' => '2020-01-02 01:02'
                 ]
             ]
         ];
@@ -106,6 +109,32 @@ class Api {
                 'email'      => $data->b_email,
                 'phone'      => $data->b_phone
             ]
+        ];
+    }
+
+    public static function generate_order_data( $data=[] ) {
+
+        return [
+            // 'billing' => [
+            //     'first_name' => $data['customer']->first_name,
+            //     'last_name'  => $data['customer']->last_name,
+            //     'address_1'  => $data['customer']->billing->address_1,
+            //     'address_2'  => $data['customer']->billing->address_2,
+            //     'city'       => $data['customer']->billing->city,
+            //     'state'      => $data['customer']->billing->state,
+            //     'postcode'   => $data['customer']->billing->postcode,
+            //     'country'    => $data['customer']->billing->country,
+            //     'email'      => $data['customer']->billing->email,
+            //     'phone'      => $data['customer']->billing->phone
+            // ],
+
+            'customer_id' => $data['customer']->id,
+            'line_items' => [
+                [
+                    'sku' => $data['product']->sku,
+                    'quantity' => 1
+                ],
+            ],
         ];
     }
 }
