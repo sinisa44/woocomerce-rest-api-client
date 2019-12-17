@@ -18,13 +18,18 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function () use ( $router ){
     //PRODUCTS
-    $router->post( 'store', 'ProductController@store' );
+    $router->post( 'product', 'ProductController@store' );
     $router->get( '/products', 'ProductController@index' );
     $router->get( '/products/{id}', 'ProductController@show' );
     $router->get( '/categories', 'ApiController@categories' );
 
     //CUSTOMERS
-    $router->post( 'customers' , 'CustomerController@store' );
+    $router->post( 'customer' , 'CustomerController@store' );
     $router->get( '/customers', 'CustomerController@index' );
     $router->get( '/customer/{id}', 'CustomerController@show' );
+
+    //ORDERS
+    $router->post( 'order', 'OrderController@order' );
+    $router->get( '/orders' , 'OrderController@index' );
+
 });
