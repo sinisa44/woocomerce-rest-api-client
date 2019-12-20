@@ -11,9 +11,20 @@ class ProductController extends Controller
 {
     public function store( Request $request ) {
 
-      $products = API::call( 'POST', 'products', API::generate_product_data( $request ) );
+     $product = API::call( 'POST', 'products', API::generate_product_data( $request ) );
 
-      return response()->json( $products );
+     if( $product){
+       // $variation = API::call( 'POST', 'products/'.$product->id.'/variations', API::generate_variation_data());
+       // $attribute = API::call( 'POST', 'products/attributes', API::generate_product_atributes ());
+     }
+      return response()->json(
+          [
+            'product'    => $product,
+            //'variation'  => $variation,
+            //'attributes' => $attribute
+          ]
+        );
+
     }
 
     public function index() {
@@ -32,10 +43,6 @@ class ProductController extends Controller
         }
 
         return response()->json( $product );
-    }
-
-    public static function generate( $data) {
-        echo $data;
     }
 
     public function categories() {

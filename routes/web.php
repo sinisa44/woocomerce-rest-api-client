@@ -31,5 +31,8 @@ $router->group(['prefix' => 'api'], function () use ( $router ){
     //ORDERS
     $router->post( 'order', 'OrderController@order' );
     $router->get( '/orders' , 'OrderController@index' );
+    $router->get( '/orders/{id}', 'OrderController@show' );
+
+    $router->get( '/attributes' , 'AttributeController@index' );
 
 });
