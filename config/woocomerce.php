@@ -12,9 +12,4 @@
 //      'woo_version' => 'wc/v3'
 //  ];
 
- return[
-     'woo_host' => 'http://91.102.224.119',
-     'woo_ck'   => 'ck_99f6bad12b3a02d8b3f7ff9e32fcb860bf91e8f9',
-     'woo_cs'   => 'cs_f43ad1e555829c28b41f1870fbc0d97ff3a21829',
-     'woo_version' => 'wc/v3'
- ];
+ 
